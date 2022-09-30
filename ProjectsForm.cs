@@ -170,6 +170,7 @@ namespace ProjectTracking
                     else
                         ClearForm();
                     btnAdd.Text = ADD;
+                    btnUpdate.Text = UPDATE;
                 }
             }
             catch (Exception ex)
