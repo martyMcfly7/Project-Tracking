@@ -96,6 +96,7 @@ namespace ProjectTracking
                 if (btnAdd.Text == ADD)
                 {
                     ClearForm();
+                    lblEmployeeID.Text = (Employees.Rows.Count + 1).ToString();
                     btnAdd.Text = SAVE;
                     btnUpdate.Text = CANCEL;
                 }

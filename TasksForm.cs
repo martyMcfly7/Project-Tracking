@@ -113,6 +113,7 @@ namespace ProjectTracking
                 if (btnAdd.Text == ADD)
                 {
                     ClearForm();
+                    lblTaskID.Text = (Tasks.Rows.Count + 1).ToString();
                     btnAdd.Text = SAVE;
                     btnUpdate.Text = CANCEL;
                 }
