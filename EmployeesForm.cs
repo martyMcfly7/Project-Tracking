@@ -137,6 +137,7 @@ namespace ProjectTracking
                         ShowData();
                     else
                         ClearForm();
+                    btnAdd.Text = ADD;
                 }
             }
             catch (Exception ex)
