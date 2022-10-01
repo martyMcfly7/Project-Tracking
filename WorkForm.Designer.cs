@@ -65,7 +65,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(50, 110);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 17);
+            this.label1.Size = new System.Drawing.Size(72, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "&Employee:";
             // 
@@ -74,7 +74,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(81, 149);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 17);
+            this.label2.Size = new System.Drawing.Size(41, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "&Task:";
             // 
@@ -100,7 +100,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(82, 190);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 17);
+            this.label3.Size = new System.Drawing.Size(39, 16);
             this.label3.TabIndex = 5;
             this.label3.Text = "&Date:";
             // 
@@ -109,7 +109,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(74, 231);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 17);
+            this.label4.Size = new System.Drawing.Size(46, 16);
             this.label4.TabIndex = 6;
             this.label4.Text = "&Hours:";
             // 
@@ -131,7 +131,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(79, 31);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 17);
+            this.label5.Size = new System.Drawing.Size(42, 16);
             this.label5.TabIndex = 8;
             this.label5.Text = "Work:";
             // 
@@ -140,7 +140,7 @@
             this.lblRowsCounter.AutoSize = true;
             this.lblRowsCounter.Location = new System.Drawing.Point(135, 31);
             this.lblRowsCounter.Name = "lblRowsCounter";
-            this.lblRowsCounter.Size = new System.Drawing.Size(44, 17);
+            this.lblRowsCounter.Size = new System.Drawing.Size(38, 16);
             this.lblRowsCounter.TabIndex = 9;
             this.lblRowsCounter.Text = "0 of 0";
             // 
@@ -149,7 +149,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(62, 71);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 17);
+            this.label7.Size = new System.Drawing.Size(58, 16);
             this.label7.TabIndex = 10;
             this.label7.Text = "Work ID:";
             // 
@@ -158,9 +158,9 @@
             this.lblWorkID.AutoSize = true;
             this.lblWorkID.Location = new System.Drawing.Point(135, 71);
             this.lblWorkID.Name = "lblWorkID";
-            this.lblWorkID.Size = new System.Drawing.Size(54, 17);
+            this.lblWorkID.Size = new System.Drawing.Size(14, 16);
             this.lblWorkID.TabIndex = 11;
-            this.lblWorkID.Text = "WorkID";
+            this.lblWorkID.Text = "0";
             // 
             // btnAdd
             // 
@@ -169,7 +169,7 @@
             this.btnAdd.Size = new System.Drawing.Size(93, 34);
             this.btnAdd.TabIndex = 12;
             this.btnAdd.Text = "&Add";
-            this.toolTip1.SetToolTip(this.btnAdd, "Add New Work Submission");
+            this.toolTip1.SetToolTip(this.btnAdd, "Add/Save New Work Submission");
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -180,7 +180,7 @@
             this.btnUpdate.Size = new System.Drawing.Size(93, 34);
             this.btnUpdate.TabIndex = 13;
             this.btnUpdate.Text = "&Update";
-            this.toolTip1.SetToolTip(this.btnUpdate, "Update Current Work Submission");
+            this.toolTip1.SetToolTip(this.btnUpdate, "Update/Cancel Current Work Submission");
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 

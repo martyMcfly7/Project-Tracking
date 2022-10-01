@@ -54,7 +54,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(55, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 17);
+            this.label1.Size = new System.Drawing.Size(72, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Employee:";
             // 
@@ -63,7 +63,7 @@
             this.lblRowsCounter.AutoSize = true;
             this.lblRowsCounter.Location = new System.Drawing.Point(135, 31);
             this.lblRowsCounter.Name = "lblRowsCounter";
-            this.lblRowsCounter.Size = new System.Drawing.Size(44, 17);
+            this.lblRowsCounter.Size = new System.Drawing.Size(38, 16);
             this.lblRowsCounter.TabIndex = 1;
             this.lblRowsCounter.Text = "0 of 0";
             // 
@@ -72,7 +72,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(38, 73);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 17);
+            this.label3.Size = new System.Drawing.Size(88, 16);
             this.label3.TabIndex = 2;
             this.label3.Text = "Employee ID:";
             // 
@@ -81,16 +81,16 @@
             this.lblEmployeeID.AutoSize = true;
             this.lblEmployeeID.Location = new System.Drawing.Point(135, 73);
             this.lblEmployeeID.Name = "lblEmployeeID";
-            this.lblEmployeeID.Size = new System.Drawing.Size(83, 17);
+            this.lblEmployeeID.Size = new System.Drawing.Size(14, 16);
             this.lblEmployeeID.TabIndex = 3;
-            this.lblEmployeeID.Text = "EmployeeID";
+            this.lblEmployeeID.Text = "0";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(49, 108);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 17);
+            this.label5.Size = new System.Drawing.Size(75, 16);
             this.label5.TabIndex = 4;
             this.label5.Text = "&First Name:";
             // 
@@ -106,7 +106,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(329, 108);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 17);
+            this.label6.Size = new System.Drawing.Size(75, 16);
             this.label6.TabIndex = 6;
             this.label6.Text = "&Last Name:";
             // 
@@ -122,7 +122,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(90, 150);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(39, 17);
+            this.label7.Size = new System.Drawing.Size(36, 16);
             this.label7.TabIndex = 8;
             this.label7.Text = "&Title:";
             // 
@@ -140,7 +140,7 @@
             this.btnAdd.Size = new System.Drawing.Size(93, 34);
             this.btnAdd.TabIndex = 10;
             this.btnAdd.Text = "&Add";
-            this.toolTip1.SetToolTip(this.btnAdd, "Add New Employee");
+            this.toolTip1.SetToolTip(this.btnAdd, "Add/Save New Employee Submission");
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -151,7 +151,7 @@
             this.btnUpdate.Size = new System.Drawing.Size(93, 34);
             this.btnUpdate.TabIndex = 11;
             this.btnUpdate.Text = "&Update";
-            this.toolTip1.SetToolTip(this.btnUpdate, "Update Current Employee Information");
+            this.toolTip1.SetToolTip(this.btnUpdate, "Update/Cancel Current Employee Submission");
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 

@@ -88,54 +88,54 @@
             projectNameLabel.AutoSize = true;
             projectNameLabel.Location = new System.Drawing.Point(26, 50);
             projectNameLabel.Name = "projectNameLabel";
-            projectNameLabel.Size = new System.Drawing.Size(97, 17);
+            projectNameLabel.Size = new System.Drawing.Size(92, 16);
             projectNameLabel.TabIndex = 1;
-            projectNameLabel.Text = "Project Name:";
+            projectNameLabel.Text = "Project &Name:";
             // 
             // projectDescriptionLabel
             // 
             projectDescriptionLabel.AutoSize = true;
             projectDescriptionLabel.Location = new System.Drawing.Point(40, 134);
             projectDescriptionLabel.Name = "projectDescriptionLabel";
-            projectDescriptionLabel.Size = new System.Drawing.Size(83, 17);
+            projectDescriptionLabel.Size = new System.Drawing.Size(78, 16);
             projectDescriptionLabel.TabIndex = 11;
-            projectDescriptionLabel.Text = "Description:";
+            projectDescriptionLabel.Text = "&Description:";
             // 
             // projectStatusLabel
             // 
             projectStatusLabel.AutoSize = true;
             projectStatusLabel.Location = new System.Drawing.Point(341, 78);
             projectStatusLabel.Name = "projectStatusLabel";
-            projectStatusLabel.Size = new System.Drawing.Size(52, 17);
+            projectStatusLabel.Size = new System.Drawing.Size(47, 16);
             projectStatusLabel.TabIndex = 5;
-            projectStatusLabel.Text = "Status:";
+            projectStatusLabel.Text = "S&tatus:";
             // 
             // projectStartDateLabel
             // 
             projectStartDateLabel.AutoSize = true;
             projectStartDateLabel.Location = new System.Drawing.Point(47, 106);
             projectStartDateLabel.Name = "projectStartDateLabel";
-            projectStartDateLabel.Size = new System.Drawing.Size(76, 17);
+            projectStartDateLabel.Size = new System.Drawing.Size(69, 16);
             projectStartDateLabel.TabIndex = 7;
-            projectStartDateLabel.Text = "Start Date:";
+            projectStartDateLabel.Text = "&Start Date:";
             // 
             // projectEndDateLabel
             // 
             projectEndDateLabel.AutoSize = true;
             projectEndDateLabel.Location = new System.Drawing.Point(322, 106);
             projectEndDateLabel.Name = "projectEndDateLabel";
-            projectEndDateLabel.Size = new System.Drawing.Size(71, 17);
+            projectEndDateLabel.Size = new System.Drawing.Size(66, 16);
             projectEndDateLabel.TabIndex = 9;
-            projectEndDateLabel.Text = "End Date:";
+            projectEndDateLabel.Text = "&End Date:";
             // 
             // projectManagerLabel
             // 
             projectManagerLabel.AutoSize = true;
             projectManagerLabel.Location = new System.Drawing.Point(55, 78);
             projectManagerLabel.Name = "projectManagerLabel";
-            projectManagerLabel.Size = new System.Drawing.Size(68, 17);
+            projectManagerLabel.Size = new System.Drawing.Size(64, 16);
             projectManagerLabel.TabIndex = 3;
-            projectManagerLabel.Text = "Manager:";
+            projectManagerLabel.Text = "&Manager:";
             // 
             // projectTrackingDataSet
             // 
@@ -189,7 +189,7 @@
             this.projectsBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.projectsBindingNavigator.Name = "projectsBindingNavigator";
             this.projectsBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.projectsBindingNavigator.Size = new System.Drawing.Size(632, 27);
+            this.projectsBindingNavigator.Size = new System.Drawing.Size(632, 31);
             this.projectsBindingNavigator.TabIndex = 0;
             this.projectsBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -200,14 +200,14 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(24, 24);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorAddNewItem.Text = "Add";
             this.bindingNavigatorAddNewItem.Visible = false;
             // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 24);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 28);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
@@ -218,8 +218,8 @@
             this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(24, 24);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorDeleteItem.Text = "Cancel";
             this.bindingNavigatorDeleteItem.Visible = false;
             // 
             // bindingNavigatorMoveFirstItem
@@ -228,8 +228,8 @@
             this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
             this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(24, 24);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveFirstItem.Text = "First";
             // 
             // bindingNavigatorMovePreviousItem
             // 
@@ -237,18 +237,19 @@
             this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
             this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(24, 24);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMovePreviousItem.Text = "Prior";
             // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 27);
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorPositionItem
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 27);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -257,7 +258,7 @@
             // bindingNavigatorSeparator1
             // 
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 27);
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorMoveNextItem
             // 
@@ -265,8 +266,8 @@
             this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(24, 24);
-            this.bindingNavigatorMoveNextItem.Text = "Move next";
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveNextItem.Text = "Next";
             // 
             // bindingNavigatorMoveLastItem
             // 
@@ -274,13 +275,13 @@
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(24, 24);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveLastItem.Text = "Last";
             // 
             // bindingNavigatorSeparator2
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // projectsBindingNavigatorSaveItem
             // 
@@ -288,8 +289,8 @@
             this.projectsBindingNavigatorSaveItem.Enabled = false;
             this.projectsBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("projectsBindingNavigatorSaveItem.Image")));
             this.projectsBindingNavigatorSaveItem.Name = "projectsBindingNavigatorSaveItem";
-            this.projectsBindingNavigatorSaveItem.Size = new System.Drawing.Size(24, 24);
-            this.projectsBindingNavigatorSaveItem.Text = "Save Data";
+            this.projectsBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 24);
+            this.projectsBindingNavigatorSaveItem.Text = "Save";
             this.projectsBindingNavigatorSaveItem.Visible = false;
             // 
             // txtProjectName
@@ -376,63 +377,70 @@
             this.workDataGridView.Location = new System.Drawing.Point(12, 251);
             this.workDataGridView.Name = "workDataGridView";
             this.workDataGridView.ReadOnly = true;
+            this.workDataGridView.RowHeadersWidth = 51;
             this.workDataGridView.RowTemplate.Height = 24;
             this.workDataGridView.Size = new System.Drawing.Size(608, 240);
-            this.workDataGridView.TabIndex = 13;
+            this.workDataGridView.TabIndex = 15;
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn1.DataPropertyName = "WorkID";
             this.dataGridViewTextBoxColumn1.HeaderText = "Work ID";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 125;
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn2.DataPropertyName = "EmployeeID";
             this.dataGridViewTextBoxColumn2.HeaderText = "Employee ID";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 116;
+            this.dataGridViewTextBoxColumn2.Width = 114;
             // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn3.DataPropertyName = "TaskID";
             this.dataGridViewTextBoxColumn3.HeaderText = "Task ID";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 85;
+            this.dataGridViewTextBoxColumn3.Width = 83;
             // 
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn4.DataPropertyName = "DateWorked";
             this.dataGridViewTextBoxColumn4.HeaderText = "Date Worked";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 120;
+            this.dataGridViewTextBoxColumn4.Width = 116;
             // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn5.DataPropertyName = "HoursWorked";
             this.dataGridViewTextBoxColumn5.HeaderText = "Hours Worked";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 128;
+            this.dataGridViewTextBoxColumn5.Width = 123;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(261, 513);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(187, 17);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Total Project Hours Worked:";
+            this.label1.Size = new System.Drawing.Size(176, 16);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Total Project &Hours Worked:";
             // 
             // txtHoursWorked
             // 
@@ -440,7 +448,8 @@
             this.txtHoursWorked.Name = "txtHoursWorked";
             this.txtHoursWorked.ReadOnly = true;
             this.txtHoursWorked.Size = new System.Drawing.Size(100, 22);
-            this.txtHoursWorked.TabIndex = 15;
+            this.txtHoursWorked.TabIndex = 14;
+            this.txtHoursWorked.Text = "0.00";
             // 
             // ProjectHoursForm
             // 

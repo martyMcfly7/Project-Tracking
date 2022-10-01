@@ -60,7 +60,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(69, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 17);
+            this.label1.Size = new System.Drawing.Size(52, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Project:";
             // 
@@ -69,7 +69,7 @@
             this.lblRowsCounter.AutoSize = true;
             this.lblRowsCounter.Location = new System.Drawing.Point(132, 30);
             this.lblRowsCounter.Name = "lblRowsCounter";
-            this.lblRowsCounter.Size = new System.Drawing.Size(44, 17);
+            this.lblRowsCounter.Size = new System.Drawing.Size(38, 16);
             this.lblRowsCounter.TabIndex = 1;
             this.lblRowsCounter.Text = "0 of 0";
             // 
@@ -78,7 +78,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(53, 71);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 17);
+            this.label3.Size = new System.Drawing.Size(68, 16);
             this.label3.TabIndex = 2;
             this.label3.Text = "Project ID:";
             // 
@@ -87,16 +87,16 @@
             this.lblProjectID.AutoSize = true;
             this.lblProjectID.Location = new System.Drawing.Point(132, 71);
             this.lblProjectID.Name = "lblProjectID";
-            this.lblProjectID.Size = new System.Drawing.Size(65, 17);
+            this.lblProjectID.Size = new System.Drawing.Size(14, 16);
             this.lblProjectID.TabIndex = 3;
-            this.lblProjectID.Text = "ProjectID";
+            this.lblProjectID.Text = "0";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(77, 106);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 17);
+            this.label5.Size = new System.Drawing.Size(47, 16);
             this.label5.TabIndex = 4;
             this.label5.Text = "&Name:";
             // 
@@ -113,7 +113,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(59, 146);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(68, 17);
+            this.label6.Size = new System.Drawing.Size(64, 16);
             this.label6.TabIndex = 6;
             this.label6.Text = "&Manager:";
             // 
@@ -122,7 +122,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(344, 146);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 17);
+            this.label7.Size = new System.Drawing.Size(47, 16);
             this.label7.TabIndex = 8;
             this.label7.Text = "S&tatus:";
             // 
@@ -140,7 +140,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(51, 188);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 17);
+            this.label8.Size = new System.Drawing.Size(69, 16);
             this.label8.TabIndex = 10;
             this.label8.Text = "&Start Date:";
             // 
@@ -161,7 +161,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(325, 188);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(71, 17);
+            this.label9.Size = new System.Drawing.Size(66, 16);
             this.label9.TabIndex = 12;
             this.label9.Text = "&End Date:";
             // 
@@ -182,7 +182,7 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(43, 230);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(83, 17);
+            this.label10.Size = new System.Drawing.Size(78, 16);
             this.label10.TabIndex = 14;
             this.label10.Text = "&Description:";
             // 
@@ -212,7 +212,7 @@
             this.btnAdd.Size = new System.Drawing.Size(93, 34);
             this.btnAdd.TabIndex = 16;
             this.btnAdd.Text = "&Add";
-            this.toolTip1.SetToolTip(this.btnAdd, "Add New Project");
+            this.toolTip1.SetToolTip(this.btnAdd, "Add/Save New Project Submission");
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -224,7 +224,7 @@
             this.btnUpdate.Size = new System.Drawing.Size(93, 34);
             this.btnUpdate.TabIndex = 17;
             this.btnUpdate.Text = "&Update";
-            this.toolTip1.SetToolTip(this.btnUpdate, "Update Current Project Information");
+            this.toolTip1.SetToolTip(this.btnUpdate, "Update/Cancel Current Project Submission");
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
