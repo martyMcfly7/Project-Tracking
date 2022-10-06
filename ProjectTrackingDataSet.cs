@@ -10,3 +10,10 @@ namespace ProjectTracking
     {
     }
 }
+
+namespace ProjectTracking.ProjectTrackingDataSetTableAdapters {
+    
+    
+    public partial class TasksTableAdapter {
+    }
+}

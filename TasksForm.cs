@@ -26,20 +26,48 @@ namespace ProjectTracking
     {
         
         #region Constants, Variables & Enums
-        // constants used for button text
+        // Button text
         const string ADD = "&Add";
         const string UPDATE = "&Update";
         const string SAVE = "&Save";
         const string CANCEL = "&Cancel";
 
-        // constant to display current row and total number of rows
+        // Display current row and total rows
         const string LABEL_ROWS = "{0} of {1} Total Tasks";
 
-        // class level variable to capture row index
+        // Captures row index
         int currentRow;
 
-        // enumeration for moving through rows
+        // Navigation through rows
         enum MoveTo { First, Prior = -1, Next = 1, Last }
+        #endregion
+
+        #region Properties
+        private ProjectTrackingDataSet MyProjects
+        {
+            get { return MyParent.MyProjects; } // Access Projects dataset
+        }
+
+        private ProjectTrackingDataSet.TasksDataTable Tasks
+        {
+            get { return MyProjects.Tasks; } // Access Tasks table
+        }
+
+        MainForm MyParent
+        {
+            get { return (MainForm)MdiParent; } // Access Main form
+        }
+
+        private int CurrentRow
+        {
+            get { return currentRow; }
+            set
+            {
+                // Current row must be between 0 and total number of rows
+                if (value >= 0 && value < Tasks.Rows.Count)
+                    currentRow = value;
+            }
+        }
         #endregion
 
         #region Events
@@ -50,21 +78,20 @@ namespace ProjectTracking
 
         private void TasksForm_Load(object sender, EventArgs e)
         {
-            // setup Add and Update buttons
+            // Setup Add and Update buttons
             btnAdd.Text = ADD;
             btnUpdate.Text = UPDATE;
-            // setup navigation buttons
+            // Setup navigation buttons
             btnFirst.Tag = MoveTo.First;
             btnPrior.Tag = MoveTo.Prior;
             btnNext.Tag = MoveTo.Next;
             btnLast.Tag = MoveTo.Last;
-            // show first row in dataset
+            // Show first row in dataset
             MoveToRow(MoveTo.First);
-            // link Manager combobox to EmployeeID using employee name
+            // Display name instead of ID
             SetupManagerComboBox();
-            // link Status combobox to StatusID using status types
             SetupStatusComboBox();
-            // set dateTimePickers to null, when clicked on set value to date selected
+            // Display date if active/blank if disabled
             SetupDateTimePicker(dtpStartDate);
             SetupDateTimePicker(dtpEndDate);
         }
@@ -81,47 +108,48 @@ namespace ProjectTracking
 
         private void NavigationButtons_Click(object sender, EventArgs e)
         {
-            // treat button as MoveTo object, set to tag
+            // Treat button as MoveTo object/set to control tag
             MoveToRow((MoveTo)((Button)sender).Tag);
         }
 
         private void btnFirst_Click(object sender, EventArgs e)
         {
-            MoveToRow(MoveTo.First); // |<
+            MoveToRow(MoveTo.First); // Button |<
         }
 
         private void btnPrior_Click(object sender, EventArgs e)
         {
-            MoveToRow(MoveTo.Prior); // <<
+            MoveToRow(MoveTo.Prior); // Button <<
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            MoveToRow(MoveTo.Next); // >>
+            MoveToRow(MoveTo.Next); // Button >>
         }
 
         private void btnLast_Click(object sender, EventArgs e)
         {
-            MoveToRow(MoveTo.Last); // >|
+            MoveToRow(MoveTo.Last); // Button >|
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            SetStatusLabel("");
             try
             {
-                // if button says add start process of creating new entry
+                // If button says add, start process of creating new entry
                 if (btnAdd.Text == ADD)
                 {
                     ClearForm();
                     lblTaskID.Text = (Tasks.Rows.Count + 1).ToString();
+                    // Change buttons to show Save/Cancel
                     btnAdd.Text = SAVE;
                     btnUpdate.Text = CANCEL;
                 }
-                else // complete the add process and save
+                else // Button says Save, save new task entry
                 {
-                    // create new Project row
                     DataRow taskRow = Tasks.NewRow();
-                    // add each control to correct Project row
+                    // Add each control to correct Task row
                     taskRow[1] = (int)cboProject.SelectedValue;
                     taskRow[2] = txtName.Text;
                     taskRow[3] = txtDescription.Text;
@@ -129,24 +157,17 @@ namespace ProjectTracking
                     taskRow[5] = dtpStartDate.Value;
                     taskRow[6] = dtpEndDate.Value;
                     Tasks.Rows.Add(taskRow);
-
-                    // create instance of Students row in the table
-                    //Tasks.AddTasksRow((ProjectTrackingDataSet.ProjectsRow)cboProject.SelectedValue, txtName.Text,
-                    //    txtDescription.Text, (ProjectTrackingDataSet.StatusRow)cboStatus.SelectedItem,
-                    //    dtpStartDate.Value, dtpEndDate.Value);
-
-                    // mark location as the new last row in the table
+                    // Mark location as the new last row in the table
                     CurrentRow = Tasks.Count - 1;
-                    // reset buttons to default
                     btnAdd.Text = ADD;
                     btnUpdate.Text = UPDATE;
-                    // update label for current and total students
                     UpdateTasksLabel();
+                    SetStatusLabel("Adding entry was successful");
                 }
             }
             catch (Exception ex)
             {
-                SetReady("Error adding entry");
+                SetStatusLabel("Error: Adding entry has failed");
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -155,15 +176,16 @@ namespace ProjectTracking
         {
             try
             {
-                // if user decides to update, get data and save
+                // Update data from controls and save
                 if (btnUpdate.Text == UPDATE)
                 {
                     if (Tasks.Rows.Count > 0)
                     {
                         GetData();
+                        SetStatusLabel("Updating entry was successful");
                     }
                 }
-                else // if user decides to cancel the add process
+                else // User cancels the add process
                 {
                     if (Tasks.Rows.Count > 0)
                         ShowData();
@@ -171,52 +193,25 @@ namespace ProjectTracking
                         ClearForm();
                     btnAdd.Text = ADD;
                     btnUpdate.Text = UPDATE;
+                    SetStatusLabel("Adding entry was cancelled");
                 }
             }
             catch (Exception ex)
             {
-                SetReady("Error updating entry");
+                SetStatusLabel("Error: Updating entry has failed");
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            SetStatusLabel("");
             this.Close();
         }
         #endregion
 
-        #region Properties
-        private ProjectTrackingDataSet MyProjects
-        {
-            get { return MyParent.MyProjects; }
-        }
-
-        // get access to the Students table
-        private ProjectTrackingDataSet.TasksDataTable Tasks
-        {
-            get { return MyProjects.Tasks; }
-        }
-
-        // to access the Main Form
-        MainForm MyParent
-        {
-            get { return (MainForm)MdiParent; }
-        }
-
-        private int CurrentRow
-        {
-            get { return currentRow; }
-            set
-            {
-                // current row must be larger or equal to 0 & less than number of rows
-                if (value >= 0 && value < Tasks.Rows.Count)
-                    currentRow = value;
-            }
-        }
-        #endregion
-
         #region Methods
+        // Link Manager combobox to EmployeeID using employee name
         private void SetupManagerComboBox()
         {
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -226,6 +221,7 @@ namespace ProjectTracking
             cboProject.SelectedValue = Tasks.Rows[CurrentRow][1]; // ProjectID
         }
 
+        // Link Status combobox to StatusID using status types
         private void SetupStatusComboBox()
         {
             cboStatus.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -235,11 +231,12 @@ namespace ProjectTracking
             cboStatus.SelectedValue = Tasks.Rows[CurrentRow][4]; // TaskStatus
         }
 
+        // TODO: Display blank DTP when unselected
         private void SetupDateTimePicker(DateTimePicker dateTimePicker)
         {
             if (!dateTimePicker.Checked)
             {
-                // hide date value since it's not set
+                // Hide date value since it's not set
                 dateTimePicker.CustomFormat = "";
                 dateTimePicker.Format = DateTimePickerFormat.Custom;
             }
@@ -252,16 +249,15 @@ namespace ProjectTracking
 
         private void MoveToRow(MoveTo WhichRow)
         {
-            // if there are rows
+            // If there are rows
             if (Tasks.Rows.Count > 0)
             {
-                if (WhichRow == MoveTo.Last) // last is count - 1
+                if (WhichRow == MoveTo.Last) // Last is count - 1
                     CurrentRow = Tasks.Rows.Count - 1;
-                else if (WhichRow == MoveTo.First) // first is 0
+                else if (WhichRow == MoveTo.First) // First is 0
                     CurrentRow = 0;
-                else
-                    CurrentRow += (int)WhichRow; // prior or next append the index
-                // call method to update/change form controls
+                else // Prior or Next append index
+                    CurrentRow += (int)WhichRow;
                 FormChange();
             }
             else
@@ -272,33 +268,32 @@ namespace ProjectTracking
         {
             UpdateTasksLabel();
             ShowData();
-            // change combo box entries according to currentRow
+            // Change combo box entries according to currentRow
             SetupManagerComboBox();
             SetupStatusComboBox();
         }
 
         private void UpdateTasksLabel()
         {
-            // format label to show current row number and total count of rows
+            // Show current row number and total number of rows
             lblRowsCounter.Text = string.Format(LABEL_ROWS, (CurrentRow + 1).ToString(),
-                Tasks.Rows.Count.ToString()); // add 1 to CurrentRow so first row displays as 1 not 0
+                Tasks.Rows.Count.ToString());
         }
 
         private void ShowData()
         {
-            // go to dataset, Tasks table, go to current index in row and specified position
             lblTaskID.Text = Tasks.Rows[CurrentRow][0].ToString();
             txtName.Text = Tasks.Rows[CurrentRow][2].ToString();
             cboProject.SelectedValue = Tasks.Rows[CurrentRow][1];
             cboStatus.SelectedValue = Tasks.Rows[CurrentRow][4];
-            // try/catch nullable values
+            // TODO: If DTP unselect display blank date (disable DTP)
             try
             {
                 dtpStartDate.Checked = true;
                 SetupDateTimePicker(dtpStartDate);
                 dtpStartDate.Value = Convert.ToDateTime(Tasks.Rows[CurrentRow][5]);
             }
-            catch // catch null, reset date time picker
+            catch // Catch null, reset date time picker
             {
                 dtpStartDate.Checked = false;
                 SetupDateTimePicker(dtpStartDate);
@@ -309,7 +304,7 @@ namespace ProjectTracking
                 SetupDateTimePicker(dtpEndDate);
                 dtpEndDate.Value = Convert.ToDateTime(Tasks.Rows[CurrentRow][6]);
             }
-            catch // catch null, reset date time picker
+            catch // Catch null, reset date time picker
             {
                 dtpEndDate.Checked = false;
                 SetupDateTimePicker(dtpEndDate);
@@ -322,6 +317,7 @@ namespace ProjectTracking
             Tasks.Rows[CurrentRow][2] = txtName.Text;
             Tasks.Rows[CurrentRow][1] = cboProject.SelectedValue;
             Tasks.Rows[CurrentRow][4] = cboStatus.SelectedValue;
+            // TODO: DTP as blank
             Tasks.Rows[CurrentRow][5] = dtpStartDate.Value.ToShortDateString();
             Tasks.Rows[CurrentRow][6] = dtpEndDate.Value.ToShortDateString();
             Tasks.Rows[CurrentRow][3] = txtDescription.Text;
@@ -329,19 +325,19 @@ namespace ProjectTracking
 
         private void ClearForm()
         {
-            SetReady("");
+            SetStatusLabel("");
             txtName.Clear();
             cboProject.SelectedIndex = -1;
             cboStatus.SelectedIndex = -1;
             dtpStartDate.Checked = false;
             dtpEndDate.Checked = false;
             txtDescription.Clear();
-            txtName.Clear();
+            txtName.Focus();
         }
 
-        private void SetReady(string message)
+        private void SetStatusLabel(string message)
         {
-            MyParent.SetReadyLabel(message);
+            MyParent.SetStatusLabel(message);
         }
         #endregion
     }

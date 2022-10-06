@@ -21,7 +21,7 @@ using System.Windows.Forms;
 
 namespace ProjectTracking
 {
-    // Form to view Employee and all matching Project/Task information & Hour worked
+    // Form to view Employee and (all matching) Project/Task information & hours worked
     public partial class EmployeeHoursForm : Form
     {
 
@@ -38,23 +38,23 @@ namespace ProjectTracking
             this.employeesTableAdapter.Fill(this.projectTrackingDataSet.Employees);
         }
 
-        // when current property changes get EmployeeID from datarow
+        // When current property changes get EmployeeID from datarow
         private void employeesBindingSource_CurrentChanged(object sender, EventArgs e)
         {
             DataRowView employee = (DataRowView)employeesBindingSource.Current;
             DataRow drEmployee = employee.Row;
-            int employeeID = (int)drEmployee["EmployeeID"]; // get EmployeeID
-            GetEmployeeHoursWorkedByID(employeeID); // call method with EmployeeID
+            int employeeID = (int)drEmployee["EmployeeID"];
+            EmployeeHoursWorked(employeeID);
         }
         #endregion
 
         #region Methods
-        // method used to calculate Employee hours worked by EmployeeID
-        private void GetEmployeeHoursWorkedByID(int employeeID)
+        // Calculate Employee hours worked (using query) by EmployeeID
+        private void EmployeeHoursWorked(int employeeID)
         {
             ProjectTrackingDataSetTableAdapters.EmployeesTableAdapter taEmployees =
                 new ProjectTrackingDataSetTableAdapters.EmployeesTableAdapter();
-            // using query, calculate Employee hours worked
+            // Query can return null result
             decimal? hoursWorked = taEmployees.GetEmployeeHoursWorked(employeeID);
             txtHoursWorked.Text = hoursWorked.ToString();
         }

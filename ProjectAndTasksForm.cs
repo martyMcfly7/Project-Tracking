@@ -21,7 +21,7 @@ using System.Windows.Forms;
 
 namespace ProjectTracking
 {
-    // Form to view Project and all matching Task information
+    // Form to view Project and (all matching) Task information
     public partial class ProjectAndTasksForm : Form
     {
 
@@ -33,8 +33,6 @@ namespace ProjectTracking
 
         private void ProjectAndTasksForm_Load(object sender, EventArgs e)
         {
-                this.tasksTableAdapter.Fill(this.projectTrackingDataSet.Tasks);
-                this.tasksTableAdapter.Fill(this.projectTrackingDataSet.Tasks);
                 this.tasksTableAdapter.Fill(this.projectTrackingDataSet.Tasks);
                 this.projectsTableAdapter.Fill(this.projectTrackingDataSet.Projects);
         }

@@ -26,14 +26,13 @@ namespace ProjectTracking
     {
 
         #region Variables
-        // create variable name for dataset
         private ProjectTrackingDataSet myProjects;
         #endregion
 
         #region Properties
-        // read-only property to return dataset
         public ProjectTrackingDataSet MyProjects
         {
+            // Read-only property to return dataset
             get { return myProjects; }
         }
         #endregion
@@ -42,50 +41,49 @@ namespace ProjectTracking
         public MainForm()
         {
             InitializeComponent();
-            // instantiate dataset
+            // Instantiate dataset
             myProjects = new ProjectTrackingDataSet();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // fill tables from dataset on form load
+            // Fill dataset from database
             Read();
-            SetReadyLabel("Ready");
         }
-
+        // TODO: Determine which forms need dataset access
         private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowChildForm(new EmployeesForm());
+            ShowChildForm(new EmployeesForm(/*MyProjects*/));
         }
 
         private void projectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowChildForm(new ProjectsForm());
+            ShowChildForm(new ProjectsForm(/*MyProjects*/));
         }
 
         private void tasksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowChildForm(new TasksForm());
+            ShowChildForm(new TasksForm(/*MyProjects*/));
         }
 
         private void workToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowChildForm(new WorkForm());
+            ShowChildForm(new WorkForm(/*MyProjects*/));
         }
 
         private void projectAndTasksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowChildForm(new ProjectAndTasksForm());
+            ShowChildForm(new ProjectAndTasksForm(/*MyProjects*/));
         }
 
         private void projectHoursToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowChildForm(new ProjectHoursForm());
+            ShowChildForm(new ProjectHoursForm(/*MyProjects*/));
         }
 
         private void employeeHoursToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowChildForm(new EmployeeHoursForm());
+            ShowChildForm(new EmployeeHoursForm(/*MyProjects*/));
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -98,19 +96,18 @@ namespace ProjectTracking
             Close();
         }
 
-        // ask user to save all changes made to database
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Do you want to save your data?", 
                 "Save Changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                Save(); // call Save()
+                Save();
             }
             else if (dialogResult == DialogResult.Cancel)
             {
-                e.Cancel = true; // cancel FormClosingEvent
-                SetReadyLabel("Ready");
+                e.Cancel = true;
+                SetStatusLabel("");
             }
         }
 
@@ -133,14 +130,19 @@ namespace ProjectTracking
         {
             foreach (Form frm in this.MdiChildren)
                 frm.Close();
+            SetStatusLabel("");
         }
         #endregion
 
         #region Methods
-        // method to read data from dataset
+        public void SetStatusLabel(string message)
+        {
+            tslReady.Text = message;
+        }
+
         public void Read()
         {
-            // create table adapters for each table in the dataset
+            // Create table adapters for each table in the database
             ProjectTrackingDataSetTableAdapters.EmployeesTableAdapter taEmployees =
                 new ProjectTrackingDataSetTableAdapters.EmployeesTableAdapter();
             ProjectTrackingDataSetTableAdapters.ProjectsTableAdapter taProjects =
@@ -154,24 +156,24 @@ namespace ProjectTracking
 
             try
             {
-                // load the data into the tables
+                // Load data into the dataset tables
                 taEmployees.Fill(myProjects.Employees);
                 taProjects.Fill(myProjects.Projects);
                 taStatus.Fill(myProjects.Status);
                 taTasks.Fill(myProjects.Tasks);
                 taWork.Fill(myProjects.Work);
+                SetStatusLabel("Success: Data loaded from database");
             }
             catch (Exception ex)
             {
-                SetReadyLabel("Error loading data from database");
+                SetStatusLabel("Error: Cannot load data from database");
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // method to save data to dataset
         public void Save()
         {
-            // create table adapters for each table in the dataset
+            // Create table adapters for each table in the dataset
             ProjectTrackingDataSetTableAdapters.EmployeesTableAdapter taEmployees =
                 new ProjectTrackingDataSetTableAdapters.EmployeesTableAdapter();
             ProjectTrackingDataSetTableAdapters.ProjectsTableAdapter taProjects =
@@ -183,11 +185,11 @@ namespace ProjectTracking
             ProjectTrackingDataSetTableAdapters.WorkTableAdapter taWork =
                 new ProjectTrackingDataSetTableAdapters.WorkTableAdapter();
 
-            // create instance of table adapter manager to manage all tables
+            // Create instance of table adapter manager to manage all tables
             ProjectTrackingDataSetTableAdapters.TableAdapterManager taManager =
                 new ProjectTrackingDataSetTableAdapters.TableAdapterManager();
 
-            // assign each table table adapter to the table adapter manager
+            // Assign each table adapter to the table adapter manager
             taManager.EmployeesTableAdapter = taEmployees;
             taManager.ProjectsTableAdapter = taProjects;
             taManager.StatusTableAdapter = taStatus;
@@ -196,28 +198,22 @@ namespace ProjectTracking
 
             try
             {
-                // using manager, update all of the tables
+                // Using manager update all tables
                 taManager.UpdateAll(myProjects);
+                SetStatusLabel("Success: Changes saved to database");
             }
             catch (Exception ex)
             {
-                SetReadyLabel("Error saving to database");
+                SetStatusLabel("Error: Cannot save to database");
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // method to set status label on main form
-        public void SetReadyLabel(string message)
-        {
-            tslReady.Text = message;
-        }
-
-        // method to show child form
         private void ShowChildForm(Form FormToShow)
         {
             FormToShow.MdiParent = this;
             FormToShow.Show();
-            SetReadyLabel(FormToShow.Text + " is ready for use");
+            SetStatusLabel(FormToShow.Text + " is ready for use");
         }
         #endregion
     }

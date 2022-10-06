@@ -26,20 +26,48 @@ namespace ProjectTracking
     {
 
         #region Constants, Variables & Enums
-        // constants used for button text
+        // Button text
         const string ADD = "&Add";
         const string UPDATE = "&Update";
         const string SAVE = "&Save";
         const string CANCEL = "&Cancel";
 
-        // constant to display current row and total number of rows
+        // Displays current row and total rows
         const string LABEL_ROWS = "{0} of {1} Total Employees";
 
-        // class level variable to capture row index
+        // Captures row index
         int currentRow;
 
-        // enumeration for moving through rows
+        // Navigation through rows
         enum MoveTo { First, Prior = -1, Next = 1, Last }
+        #endregion
+
+        #region Properties
+        private ProjectTrackingDataSet MyProjects
+        {
+            get { return MyParent.MyProjects; } // Access Projects dataset
+        }
+
+        private ProjectTrackingDataSet.EmployeesDataTable Employees
+        {
+            get { return MyProjects.Employees; } // Access Employees table
+        }
+
+        MainForm MyParent
+        {
+            get { return (MainForm)MdiParent; } // Access Main form
+        }
+
+        private int CurrentRow
+        {
+            get { return currentRow; }
+            set
+            {
+                // Current row must be between 0 and total number of rows
+                if (value >= 0 && value < Employees.Rows.Count)
+                    currentRow = value;
+            }
+        }
         #endregion
 
         #region Events
@@ -50,89 +78,91 @@ namespace ProjectTracking
 
         private void EmployeesForm_Load(object sender, EventArgs e)
         {
-            // setup Add and Update buttons
+            // Setup Add and Update buttons
             btnAdd.Text = ADD;
             btnUpdate.Text = UPDATE;
-            // setup navigation buttons
+            // Setup navigation buttons
             btnFirst.Tag = MoveTo.First;
             btnPrior.Tag = MoveTo.Prior;
             btnNext.Tag = MoveTo.Next;
             btnLast.Tag = MoveTo.Last;
-            // show first row in dataset
+            // Show first row in dataset
             MoveToRow(MoveTo.First);
         }
 
         private void NavigationButtons_Click(object sender, EventArgs e)
         {
-            // treat button as MoveTo object, set to tag
+            // Treat button as MoveTo object/set to control tag
             MoveToRow((MoveTo)((Button)sender).Tag);
         }
 
         private void btnFirst_Click(object sender, EventArgs e)
         {
-            MoveToRow(MoveTo.First); // |<
+            MoveToRow(MoveTo.First); // Button |<
         }
 
         private void btnPrior_Click(object sender, EventArgs e)
         {
-            MoveToRow(MoveTo.Prior); // <<
+            MoveToRow(MoveTo.Prior); // Button <<
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            MoveToRow(MoveTo.Next); // >>
+            MoveToRow(MoveTo.Next); // Button >>
         }
 
         private void btnLast_Click(object sender, EventArgs e)
         {
-            MoveToRow(MoveTo.Last); // >|
+            MoveToRow(MoveTo.Last); // Button >|
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            SetStatusLabel("");
             try
             {
-                // if button says add start process of creating new entry
+                // If button says Add, start process of creating new entry
                 if (btnAdd.Text == ADD)
                 {
                     ClearForm();
                     lblEmployeeID.Text = (Employees.Rows.Count + 1).ToString();
+                    // Change buttons to show Save/Cancel
                     btnAdd.Text = SAVE;
                     btnUpdate.Text = CANCEL;
                 }
-                else // complete the add process and save
+                else // Button says Save, save new employee entry
                 {
-                    // create instance of Employees row in the table
                     Employees.AddEmployeesRow(txtTitle.Text, txtFirstName.Text, txtLastName.Text);
-                    // mark location as the new last row in the table
+                    // Mark location as the new last row in the table
                     CurrentRow = Employees.Count - 1;
-                    // reset buttons to default
                     btnAdd.Text = ADD;
                     btnUpdate.Text = UPDATE;
-                    // update label for current and total employees
                     UpdateEmployeeLabel();
+                    SetStatusLabel("Adding entry was successful");
                 }
             }
             catch (Exception ex)
             {
-                SetReady("Error adding entry");
+                SetStatusLabel("Error: Adding entry has failed");
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            SetStatusLabel("");
             try
             {
-                // if user decides to update, get data and save
+                // Update data from controls and save
                 if (btnUpdate.Text == UPDATE) 
                 {
                     if (Employees.Rows.Count > 0)
                     {
                         GetData();
+                        SetStatusLabel("Updating entry was successful");
                     }
                 }
-                else // if user decides to cancel the add process
+                else // User cancels the add process
                 {
                     if (Employees.Rows.Count > 0)
                         ShowData();
@@ -140,64 +170,36 @@ namespace ProjectTracking
                         ClearForm();
                     btnAdd.Text = ADD;
                     btnUpdate.Text = UPDATE;
+                    SetStatusLabel("Adding entry was cancelled");
                 }
             }
             catch (Exception ex)
             {
-                SetReady("Error updating entry");
+                SetStatusLabel("Error: Updating entry has failed");
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            SetStatusLabel("");
             this.Close();
-        }
-        #endregion
-
-        #region Properties
-        private ProjectTrackingDataSet MyProjects
-        {
-            get { return MyParent.MyProjects; }
-        }
-
-        // get access to the Employees table
-        private ProjectTrackingDataSet.EmployeesDataTable Employees
-        {
-            get { return MyProjects.Employees; }
-        }
-
-        // to access the Main Form
-        MainForm MyParent
-        {
-            get { return (MainForm)MdiParent; }
-        }
-
-        private int CurrentRow
-        {
-            get { return currentRow; }
-            set
-            {
-                // current row must be larger or equal to 0 & less than number of rows
-                if (value >= 0 && value < Employees.Rows.Count)
-                    currentRow = value;
-            }
         }
         #endregion
 
         #region Methods
         private void MoveToRow(MoveTo WhichRow)
         {
-            // if there are rows
+            SetStatusLabel("");
+            // If there are rows
             if (Employees.Rows.Count > 0)
             {
-                if (WhichRow == MoveTo.Last) // last is count - 1
+                if (WhichRow == MoveTo.Last) // Last is count - 1
                     CurrentRow = Employees.Rows.Count - 1;
-                else if (WhichRow == MoveTo.First) // first is 0
+                else if (WhichRow == MoveTo.First) // First is 0
                     CurrentRow = 0;
-                else
-                    CurrentRow += (int)WhichRow; // prior or next append the index
-                // call method to update/change form controls
+                else // Prior or Next append index
+                    CurrentRow += (int)WhichRow;
                 FormChange();
             }
             else
@@ -212,14 +214,13 @@ namespace ProjectTracking
 
         private void UpdateEmployeeLabel()
         {
-            // format label to show current row number and total count of rows
+            // Show current row number and total number of rows
             lblRowsCounter.Text = string.Format(LABEL_ROWS, (CurrentRow + 1).ToString(),
-                Employees.Rows.Count.ToString()); // add 1 to CurrentRow so first row displays as 1 not 0
+                Employees.Rows.Count.ToString());
         }
 
         private void ShowData()
         {
-            // go to dataset, Employees table, go to current index in row and specified position
             lblEmployeeID.Text = Employees.Rows[CurrentRow][0].ToString();
             txtFirstName.Text = Employees.Rows[CurrentRow][2].ToString();
             txtLastName.Text = Employees.Rows[CurrentRow][3].ToString();
@@ -235,16 +236,16 @@ namespace ProjectTracking
 
         private void ClearForm()
         {
-            SetReady("");
+            SetStatusLabel("");
             txtFirstName.Clear();
             txtLastName.Clear();
             txtTitle.Clear();
             txtFirstName.Focus();
         }
 
-        private void SetReady(string message)
+        private void SetStatusLabel(string message)
         {
-            MyParent.SetReadyLabel(message);
+            MyParent.SetStatusLabel(message);
         }
         #endregion
     }

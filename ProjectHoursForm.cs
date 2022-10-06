@@ -21,7 +21,7 @@ using System.Windows.Forms;
 
 namespace ProjectTracking
 {
-    // Form to view Project and all matching Employee/Task information & Hours worked
+    // Form to view Project and (all matching) Employee/Task information & hours worked
     public partial class ProjectHoursForm : Form
     {
         #region Events
@@ -36,29 +36,29 @@ namespace ProjectTracking
             this.projectsTableAdapter.Fill(this.projectTrackingDataSet.Projects);
         }
 
-        // when current property changes get ProjectID from datarow
+        // When current property changes get ProjectID from datarow
         private void projectsBindingSource_CurrentChanged(object sender, EventArgs e)
         {
             DataRowView project = (DataRowView)projectsBindingSource.Current;
             DataRow drProject = project.Row;
-            int projectID = (int)drProject["ProjectID"]; // get ProjectID
-            GetProjectHoursWorkedByID(projectID); // call method with ProjectID
-            //FillDataGridViewByID(projectID);
+            int projectID = (int)drProject["ProjectID"];
+            ProjectHoursWorked(projectID);
+            //FillDataGridView(projectID);
         }
         #endregion
 
         #region Methods
-        // method used to calculate Project hours worked by ProjectID
-        private void GetProjectHoursWorkedByID(int projectID)
+        // Calculate Project hours worked (using query) by ProjectID
+        private void ProjectHoursWorked(int projectID)
         {
             ProjectTrackingDataSetTableAdapters.ProjectsTableAdapter taProjects =
                 new ProjectTrackingDataSetTableAdapters.ProjectsTableAdapter();
-            // using query, calculate Project hours worked
+            // Query can return null result
             decimal? hoursWorked = (decimal?)taProjects.GetProjectHoursWorked(projectID);
             txtHoursWorked.Text = hoursWorked.ToString();
         }
 
-        private void FillDataGridViewByID(int projectID)
+        private void FillDataGridView(int projectID)
         {
             //ProjectTrackingDataSetTableAdapters.WorkTableAdapter taWork =
             //    new ProjectTrackingDataSetTableAdapters.WorkTableAdapter();
