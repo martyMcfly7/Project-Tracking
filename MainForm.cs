@@ -78,12 +78,12 @@ namespace ProjectTracking
 
         private void projectHoursToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowChildForm(new ProjectHoursForm(/*MyProjects*/));
+            ShowChildForm(new ProjectHoursForm(MyProjects));
         }
 
         private void employeeHoursToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowChildForm(new EmployeeHoursForm(/*MyProjects*/));
+            ShowChildForm(new EmployeeHoursForm(MyProjects));
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)

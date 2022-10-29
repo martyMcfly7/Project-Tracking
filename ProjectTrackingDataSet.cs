@@ -8,6 +8,9 @@ namespace ProjectTracking
 
     public partial class ProjectTrackingDataSet
     {
+        partial class ProjectHoursDataTable
+        {
+        }
     }
 }
 

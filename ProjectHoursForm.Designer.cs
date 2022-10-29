@@ -36,12 +36,10 @@
             System.Windows.Forms.Label projectEndDateLabel;
             System.Windows.Forms.Label projectManagerLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectHoursForm));
-            this.projectTrackingDataSet = new ProjectTracking.ProjectTrackingDataSet();
-            this.projectsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.projectsTableAdapter = new ProjectTracking.ProjectTrackingDataSetTableAdapters.ProjectsTableAdapter();
-            this.tableAdapterManager = new ProjectTracking.ProjectTrackingDataSetTableAdapters.TableAdapterManager();
             this.projectsBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.projectsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.projectTrackingDataSet = new ProjectTracking.ProjectTrackingDataSet();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -59,28 +57,25 @@
             this.txtProjectStartDate = new System.Windows.Forms.TextBox();
             this.txtProjectEndDate = new System.Windows.Forms.TextBox();
             this.txtProjectManager = new System.Windows.Forms.TextBox();
-            this.workBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.workTableAdapter = new ProjectTracking.ProjectTrackingDataSetTableAdapters.WorkTableAdapter();
-            this.workDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pHDataGridView = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.txtHoursWorked = new System.Windows.Forms.TextBox();
+            this.projectsTableAdapter = new ProjectTracking.ProjectTrackingDataSetTableAdapters.ProjectsTableAdapter();
+            this.tableAdapterManager = new ProjectTracking.ProjectTrackingDataSetTableAdapters.TableAdapterManager();
+            this.workBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.workTableAdapter = new ProjectTracking.ProjectTrackingDataSetTableAdapters.WorkTableAdapter();
             projectNameLabel = new System.Windows.Forms.Label();
             projectDescriptionLabel = new System.Windows.Forms.Label();
             projectStatusLabel = new System.Windows.Forms.Label();
             projectStartDateLabel = new System.Windows.Forms.Label();
             projectEndDateLabel = new System.Windows.Forms.Label();
             projectManagerLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.projectTrackingDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.projectsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.projectsBindingNavigator)).BeginInit();
             this.projectsBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.projectsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.projectTrackingDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pHDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.workDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // projectNameLabel
@@ -137,31 +132,6 @@
             projectManagerLabel.TabIndex = 3;
             projectManagerLabel.Text = "&Manager:";
             // 
-            // projectTrackingDataSet
-            // 
-            this.projectTrackingDataSet.DataSetName = "ProjectTrackingDataSet";
-            this.projectTrackingDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // projectsBindingSource
-            // 
-            this.projectsBindingSource.DataMember = "Projects";
-            this.projectsBindingSource.DataSource = this.projectTrackingDataSet;
-            this.projectsBindingSource.CurrentChanged += new System.EventHandler(this.projectsBindingSource_CurrentChanged);
-            // 
-            // projectsTableAdapter
-            // 
-            this.projectsTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.EmployeesTableAdapter = null;
-            this.tableAdapterManager.ProjectsTableAdapter = this.projectsTableAdapter;
-            this.tableAdapterManager.StatusTableAdapter = null;
-            this.tableAdapterManager.TasksTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = ProjectTracking.ProjectTrackingDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            this.tableAdapterManager.WorkTableAdapter = null;
-            // 
             // projectsBindingNavigator
             // 
             this.projectsBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
@@ -189,7 +159,7 @@
             this.projectsBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.projectsBindingNavigator.Name = "projectsBindingNavigator";
             this.projectsBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.projectsBindingNavigator.Size = new System.Drawing.Size(632, 31);
+            this.projectsBindingNavigator.Size = new System.Drawing.Size(632, 27);
             this.projectsBindingNavigator.TabIndex = 0;
             this.projectsBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -204,10 +174,21 @@
             this.bindingNavigatorAddNewItem.Text = "Add";
             this.bindingNavigatorAddNewItem.Visible = false;
             // 
+            // projectsBindingSource
+            // 
+            this.projectsBindingSource.DataMember = "Projects";
+            this.projectsBindingSource.DataSource = this.projectTrackingDataSet;
+            this.projectsBindingSource.CurrentChanged += new System.EventHandler(this.projectsBindingSource_CurrentChanged);
+            // 
+            // projectTrackingDataSet
+            // 
+            this.projectTrackingDataSet.DataSetName = "ProjectTrackingDataSet";
+            this.projectTrackingDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 28);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 24);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
@@ -228,7 +209,7 @@
             this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
             this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMoveFirstItem.Text = "First";
             // 
             // bindingNavigatorMovePreviousItem
@@ -237,13 +218,13 @@
             this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
             this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMovePreviousItem.Text = "Prior";
             // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 31);
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 27);
             // 
             // bindingNavigatorPositionItem
             // 
@@ -258,7 +239,7 @@
             // bindingNavigatorSeparator1
             // 
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // bindingNavigatorMoveNextItem
             // 
@@ -266,7 +247,7 @@
             this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMoveNextItem.Text = "Next";
             // 
             // bindingNavigatorMoveLastItem
@@ -275,13 +256,13 @@
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorMoveLastItem.Text = "Last";
             // 
             // bindingNavigatorSeparator2
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 31);
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // projectsBindingNavigatorSaveItem
             // 
@@ -348,90 +329,22 @@
             this.txtProjectManager.Size = new System.Drawing.Size(155, 22);
             this.txtProjectManager.TabIndex = 4;
             // 
-            // workBindingSource
+            // pHDataGridView
             // 
-            this.workBindingSource.DataMember = "Work";
-            this.workBindingSource.DataSource = this.projectTrackingDataSet;
-            // 
-            // workTableAdapter
-            // 
-            this.workTableAdapter.ClearBeforeFill = true;
-            // 
-            // workDataGridView
-            // 
-            this.workDataGridView.AllowUserToAddRows = false;
-            this.workDataGridView.AllowUserToDeleteRows = false;
-            this.workDataGridView.AllowUserToOrderColumns = true;
-            this.workDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pHDataGridView.AllowUserToAddRows = false;
+            this.pHDataGridView.AllowUserToDeleteRows = false;
+            this.pHDataGridView.AllowUserToOrderColumns = true;
+            this.pHDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.workDataGridView.AutoGenerateColumns = false;
-            this.workDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.workDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
-            this.workDataGridView.DataSource = this.workBindingSource;
-            this.workDataGridView.Location = new System.Drawing.Point(12, 251);
-            this.workDataGridView.Name = "workDataGridView";
-            this.workDataGridView.ReadOnly = true;
-            this.workDataGridView.RowHeadersWidth = 51;
-            this.workDataGridView.RowTemplate.Height = 24;
-            this.workDataGridView.Size = new System.Drawing.Size(608, 240);
-            this.workDataGridView.TabIndex = 15;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "WorkID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Work ID";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            this.dataGridViewTextBoxColumn1.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "EmployeeID";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Employee ID";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 114;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "TaskID";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Task ID";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 83;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "DateWorked";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Date Worked";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 116;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "HoursWorked";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Hours Worked";
-            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 123;
+            this.pHDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.pHDataGridView.Location = new System.Drawing.Point(12, 251);
+            this.pHDataGridView.Name = "pHDataGridView";
+            this.pHDataGridView.ReadOnly = true;
+            this.pHDataGridView.RowHeadersWidth = 51;
+            this.pHDataGridView.RowTemplate.Height = 24;
+            this.pHDataGridView.Size = new System.Drawing.Size(608, 240);
+            this.pHDataGridView.TabIndex = 15;
             // 
             // label1
             // 
@@ -451,6 +364,29 @@
             this.txtHoursWorked.TabIndex = 14;
             this.txtHoursWorked.Text = "0.00";
             // 
+            // projectsTableAdapter
+            // 
+            this.projectsTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.EmployeesTableAdapter = null;
+            this.tableAdapterManager.ProjectsTableAdapter = this.projectsTableAdapter;
+            this.tableAdapterManager.StatusTableAdapter = null;
+            this.tableAdapterManager.TasksTableAdapter = null;
+            this.tableAdapterManager.UpdateOrder = ProjectTracking.ProjectTrackingDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.WorkTableAdapter = null;
+            // 
+            // workBindingSource
+            // 
+            this.workBindingSource.DataMember = "Work";
+            this.workBindingSource.DataSource = this.projectTrackingDataSet;
+            // 
+            // workTableAdapter
+            // 
+            this.workTableAdapter.ClearBeforeFill = true;
+            // 
             // ProjectHoursForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -458,7 +394,7 @@
             this.ClientSize = new System.Drawing.Size(632, 553);
             this.Controls.Add(this.txtHoursWorked);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.workDataGridView);
+            this.Controls.Add(this.pHDataGridView);
             this.Controls.Add(projectNameLabel);
             this.Controls.Add(this.txtProjectName);
             this.Controls.Add(projectDescriptionLabel);
@@ -475,13 +411,13 @@
             this.Name = "ProjectHoursForm";
             this.Text = "Project Hours Form";
             this.Load += new System.EventHandler(this.ProjectHoursForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.projectTrackingDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.projectsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.projectsBindingNavigator)).EndInit();
             this.projectsBindingNavigator.ResumeLayout(false);
             this.projectsBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.projectsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.projectTrackingDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pHDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.workBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.workDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -514,13 +450,8 @@
         private System.Windows.Forms.TextBox txtProjectManager;
         private System.Windows.Forms.BindingSource workBindingSource;
         private ProjectTrackingDataSetTableAdapters.WorkTableAdapter workTableAdapter;
-        private System.Windows.Forms.DataGridView workDataGridView;
+        private System.Windows.Forms.DataGridView pHDataGridView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtHoursWorked;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }

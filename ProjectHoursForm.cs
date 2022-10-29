@@ -24,10 +24,15 @@ namespace ProjectTracking
     // Form to view Project and (all matching) Employee/Task information & hours worked
     public partial class ProjectHoursForm : Form
     {
+        #region Variables
+        ProjectTrackingDataSet projects;
+        #endregion
+
         #region Events
-        public ProjectHoursForm()
+        public ProjectHoursForm(ProjectTrackingDataSet projectsDataSet)
         {
             InitializeComponent();
+            projects = projectsDataSet;
         }
 
         private void ProjectHoursForm_Load(object sender, EventArgs e)
@@ -43,7 +48,7 @@ namespace ProjectTracking
             DataRow drProject = project.Row;
             int projectID = (int)drProject["ProjectID"];
             ProjectHoursWorked(projectID);
-            //FillDataGridView(projectID);
+            FillDataGridView(projectID);
         }
         #endregion
 
@@ -58,14 +63,35 @@ namespace ProjectTracking
             txtHoursWorked.Text = hoursWorked.ToString();
         }
 
+        // Display results in DataGridView from selected project
         private void FillDataGridView(int projectID)
         {
-            //ProjectTrackingDataSetTableAdapters.WorkTableAdapter taWork =
-            //    new ProjectTrackingDataSetTableAdapters.WorkTableAdapter();
-            //// using query, get related rows by ProjectID
-            //var dataTable = new DataTable();
-            //dataTable = taWork.GetDataByProjectID(projectID);
-            //workDataGridView.DataSource = dataTable;
+            ProjectTrackingDataSetTableAdapters.WorkTableAdapter taWork =
+                new ProjectTrackingDataSetTableAdapters.WorkTableAdapter();
+            ProjectTrackingDataSet.WorkDataTable table = new ProjectTrackingDataSet.WorkDataTable();
+            try
+            {
+                taWork.FillProjectHoursByProjectID(table, projectID);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine(table.GetErrors()[0].RowError);
+            }
+            pHDataGridView.DataSource = table;
+            // Format DGV columns
+            pHDataGridView.Columns["WorkID"].Visible = false;
+            pHDataGridView.Columns["EmployeeID"].Visible = false;
+            pHDataGridView.Columns["TaskID"].Visible = false;
+            pHDataGridView.Columns["FullName"].DisplayIndex = 1;
+            pHDataGridView.Columns["TaskName"].DisplayIndex = 2;
+            pHDataGridView.Columns["StatusType"].DisplayIndex = 3;
+            pHDataGridView.Columns["DateWorked"].DisplayIndex = 4;
+            pHDataGridView.Columns["HoursWorked"].DisplayIndex = 5;
+            pHDataGridView.Columns["FullName"].HeaderText = "Employee";
+            pHDataGridView.Columns["TaskName"].HeaderText = "Task";
+            pHDataGridView.Columns["StatusType"].HeaderText = "Status";
+            pHDataGridView.Columns["DateWorked"].HeaderText = "Date Worked";
+            pHDataGridView.Columns["HoursWorked"].HeaderText = "Hours Worked";
         }
         #endregion
     }

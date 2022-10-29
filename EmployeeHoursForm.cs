@@ -24,11 +24,15 @@ namespace ProjectTracking
     // Form to view Employee and (all matching) Project/Task information & hours worked
     public partial class EmployeeHoursForm : Form
     {
+        #region Variables
+        ProjectTrackingDataSet projects;
+        #endregion
 
         #region Events
-        public EmployeeHoursForm()
+        public EmployeeHoursForm(ProjectTrackingDataSet projectsDataSet)
         {
             InitializeComponent();
+            projects = projectsDataSet;
         }
 
         private void EmployeeHoursForm_Load(object sender, EventArgs e)
@@ -45,6 +49,7 @@ namespace ProjectTracking
             DataRow drEmployee = employee.Row;
             int employeeID = (int)drEmployee["EmployeeID"];
             EmployeeHoursWorked(employeeID);
+            FillDataGridView(employeeID);
         }
         #endregion
 
@@ -55,8 +60,39 @@ namespace ProjectTracking
             ProjectTrackingDataSetTableAdapters.EmployeesTableAdapter taEmployees =
                 new ProjectTrackingDataSetTableAdapters.EmployeesTableAdapter();
             // Query can return null result
-            decimal? hoursWorked = taEmployees.GetEmployeeHoursWorked(employeeID);
+            decimal? hoursWorked = (decimal?)taEmployees.GetEmployeeHoursWorked(employeeID);
             txtHoursWorked.Text = hoursWorked.ToString();
+        }
+
+        // Display results in DataGridView from selected employee
+        private void FillDataGridView(int employeeID)
+        {
+            ProjectTrackingDataSetTableAdapters.WorkTableAdapter taWork = 
+                new ProjectTrackingDataSetTableAdapters.WorkTableAdapter();
+            ProjectTrackingDataSet.WorkDataTable table = new ProjectTrackingDataSet.WorkDataTable();
+            try
+            {
+                taWork.FillEmployeeHoursByProjectID(table, employeeID);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine(table.GetErrors()[0].RowError);
+            }
+           eHDataGridView.DataSource = table;
+            // Format DGV columns
+            eHDataGridView.Columns["WorkID"].Visible = false;
+            eHDataGridView.Columns["EmployeeID"].Visible = false;
+            eHDataGridView.Columns["TaskID"].Visible = false;
+            eHDataGridView.Columns["ProjectName"].DisplayIndex = 1;
+            eHDataGridView.Columns["TaskName"].DisplayIndex = 2;
+            eHDataGridView.Columns["StatusType"].DisplayIndex = 3;
+            eHDataGridView.Columns["DateWorked"].DisplayIndex = 4;
+            eHDataGridView.Columns["HoursWorked"].DisplayIndex = 5;
+            eHDataGridView.Columns["ProjectName"].HeaderText = "Project";
+            eHDataGridView.Columns["TaskName"].HeaderText = "Task";
+            eHDataGridView.Columns["StatusType"].HeaderText = "Status";
+            eHDataGridView.Columns["DateWorked"].HeaderText = "Date Worked";
+            eHDataGridView.Columns["HoursWorked"].HeaderText = "Hours Worked";
         }
         #endregion
     }

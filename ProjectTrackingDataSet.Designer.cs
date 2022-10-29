@@ -3100,9 +3100,9 @@ SELECT EmployeeID, Title, FirstName, LastName FROM Employees WHERE (EmployeeID =
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT SUM(w.HoursWorked) AS HoursWorked\r\nFROM     Employees AS e INNER JOIN\r\n   " +
-                "               Work AS w ON e.EmployeeID = w.EmployeeID\r\nWHERE  (e.EmployeeID = " +
-                "@employeeID)";
+            this._commandCollection[1].CommandText = "SELECT SUM(w.HoursWorked) AS HoursWorked\r\nFROM Employees AS e \r\n                 " +
+                " INNER JOIN Work AS w ON e.EmployeeID = w.EmployeeID\r\nWHERE (e.EmployeeID = @emp" +
+                "loyeeID)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@employeeID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "EmployeeID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -3309,7 +3309,7 @@ SELECT EmployeeID, Title, FirstName, LastName FROM Employees WHERE (EmployeeID =
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual global::System.Nullable<decimal> GetEmployeeHoursWorked(int employeeID) {
+        public virtual object GetEmployeeHoursWorked(int employeeID) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             command.Parameters[0].Value = ((int)(employeeID));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
@@ -3328,10 +3328,10 @@ SELECT EmployeeID, Title, FirstName, LastName FROM Employees WHERE (EmployeeID =
             }
             if (((returnValue == null) 
                         || (returnValue.GetType() == typeof(global::System.DBNull)))) {
-                return new global::System.Nullable<decimal>();
+                return null;
             }
             else {
-                return new global::System.Nullable<decimal>(((decimal)(returnValue)));
+                return ((object)(returnValue));
             }
         }
     }
@@ -3532,9 +3532,9 @@ SELECT ProjectID, ProjectName, ProjectDescription, ProjectStatus, ProjectStartDa
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT SUM(w.HoursWorked) AS HoursWorked\r\nFROM     Projects AS p INNER JOIN\r\n    " +
-                "              Tasks AS t ON p.ProjectID = t.ProjectID INNER JOIN\r\n              " +
-                "    Work AS w ON t.TaskID = w.TaskID\r\nWHERE  (p.ProjectID = @projectID)";
+            this._commandCollection[1].CommandText = "SELECT SUM(w.HoursWorked) AS HoursWorked\r\nFROM Projects AS p\r\n\tINNER JOIN Tasks A" +
+                "S t ON p.ProjectID = t.ProjectID\r\n\tINNER JOIN Work AS w ON t.TaskID = w.TaskID\r\n" +
+                "WHERE (p.ProjectID = @projectID)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@projectID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -4320,19 +4320,12 @@ SELECT TaskID, ProjectID, TaskName, TaskDescription, TaskStatus, TaskStartDate, 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT TaskID, ProjectID, TaskName, TaskDescription, TaskStatus, TaskStartDate, T" +
                 "askEndDate FROM dbo.Tasks";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT TaskID, t.ProjectID, TaskName, TaskDescription, TaskStatus, TaskStartDate," +
-                " TaskEndDate \r\nFROM Projects AS p INNER JOIN Tasks AS t ON p.ProjectID = t.Proje" +
-                "ctID\r\nWHERE (p.ProjectID = @projectID)";
-            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@projectID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4354,32 +4347,6 @@ SELECT TaskID, ProjectID, TaskName, TaskDescription, TaskStatus, TaskStartDate, 
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual ProjectTrackingDataSet.TasksDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            ProjectTrackingDataSet.TasksDataTable dataTable = new ProjectTrackingDataSet.TasksDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByProjectID(ProjectTrackingDataSet.TasksDataTable dataTable, int projectID) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(projectID));
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual ProjectTrackingDataSet.TasksDataTable GetDataByProjectID(int projectID) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(projectID));
             ProjectTrackingDataSet.TasksDataTable dataTable = new ProjectTrackingDataSet.TasksDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -4780,20 +4747,32 @@ SELECT WorkID, EmployeeID, TaskID, DateWorked, HoursWorked FROM Work WHERE (Work
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT WorkID, EmployeeID, TaskID, DateWorked, HoursWorked FROM dbo.[Work]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT FirstName + ' ' + LastName AS FullName, TaskName, DateWorked, HoursWorked
-FROM Projects AS p INNER JOIN Tasks AS t ON p.ProjectID = t.ProjectID
-INNER JOIN Work AS w ON t.TaskID = w.TaskID
-INNER JOIN Employees AS e ON w.EmployeeID = e.EmployeeID
-WHERE (p.ProjectID = @projectID)";
+            this._commandCollection[1].CommandText = @"SELECT ProjectName, TaskName, StatusType, DateWorked, HoursWorked 
+FROM Work AS w 
+                INNER JOIN Tasks AS t ON w.TaskID = t.TaskID
+                INNER JOIN Projects AS p ON t.ProjectID = p.ProjectID
+	INNER JOIN Status AS s ON t.TaskStatus = s.StatusID
+WHERE (w.EmployeeID = @employeeID)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@projectID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@employeeID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "EmployeeID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = @"SELECT FirstName + ' ' + LastName AS FullName, TaskName, StatusType, DateWorked, HoursWorked
+FROM Projects AS p
+	INNER JOIN Tasks AS t ON p.ProjectID = t.ProjectID
+	INNER JOIN Work AS w ON t.TaskID = w.TaskID
+	INNER JOIN Employees AS e ON w.EmployeeID = e.EmployeeID
+	INNER JOIN Status AS s ON s.StatusID = t.TaskStatus
+WHERE (p.ProjectID = @projectID)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@projectID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4824,9 +4803,9 @@ WHERE (p.ProjectID = @projectID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByProjectID(ProjectTrackingDataSet.WorkDataTable dataTable, int projectID) {
+        public virtual int FillEmployeeHoursByProjectID(ProjectTrackingDataSet.WorkDataTable dataTable, int employeeID) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(projectID));
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(employeeID));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -4837,13 +4816,15 @@ WHERE (p.ProjectID = @projectID)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual ProjectTrackingDataSet.WorkDataTable GetDataByProjectID(int projectID) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillProjectHoursByProjectID(ProjectTrackingDataSet.WorkDataTable dataTable, int projectID) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(projectID));
-            ProjectTrackingDataSet.WorkDataTable dataTable = new ProjectTrackingDataSet.WorkDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
